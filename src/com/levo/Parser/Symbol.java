@@ -8,13 +8,13 @@ import java.util.function.Function;
  */
 public class Symbol {
     public enum SymbolType {
-        NUMBER, VARIABLE, FUNCTION, BIFUNCTION
+        NUMBER, VARIABLE, UNARY_OP, BINARY_OP
     }
 
     public SymbolType type;
     public Number number;
-    public BiFunction<Number, Number, Number> bifunction;
-    public Function<Number, Number> function;
+    public BiFunction<Number, Number, Number> binaryOperator;
+    public Function<Number, Number> unaryOperator;
     public Character varName;
 
     public Symbol(Number number) {
@@ -22,17 +22,37 @@ public class Symbol {
         this.number = number;
     }
 
-    public Symbol(BiFunction<Number, Number, Number> bifunction) {
-        this.type = SymbolType.BIFUNCTION;
-        this.bifunction = bifunction;
+    public Symbol(BiFunction<Number, Number, Number> binaryOperator) {
+        this.type = SymbolType.BINARY_OP;
+        this.binaryOperator = binaryOperator;
     }
 
-    public Symbol(Function<Number, Number> function) {
-        this.type = SymbolType.FUNCTION;
-        this.function = function;
+    public Symbol(Function<Number, Number> unaryOperator) {
+        this.type = SymbolType.UNARY_OP;
+        this.unaryOperator = unaryOperator;
     }
 
     public Symbol(Character name) {
         this.type = SymbolType.VARIABLE;
+    }
+
+    public SymbolType getType() {
+        return type;
+    }
+
+    public Number getNumber() {
+        return number;
+    }
+
+    public BiFunction<Number, Number, Number> getBinaryOperator() {
+        return binaryOperator;
+    }
+
+    public Function<Number, Number> getUnaryOperator() {
+        return unaryOperator;
+    }
+
+    public Character getVarName() {
+        return varName;
     }
 }
