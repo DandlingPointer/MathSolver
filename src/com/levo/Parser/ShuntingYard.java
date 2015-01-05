@@ -65,10 +65,10 @@ public class ShuntingYard {
     }
 
     public void generatePostfixExpression() {
-        Stack<String> operatorStack;
-        ArrayList<String> result;
-        
-
+        Stack<String> operatorStack = new Stack<String>();
+        ArrayList<String> result = new ArrayList<String>();
+        for (String token : tokenizedExpression) {
+        }
     }
 
     public String[] getPostfixExpression() {
