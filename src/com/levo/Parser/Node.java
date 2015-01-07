@@ -1,18 +1,16 @@
 package com.levo.Parser;
 
-import java.util.ArrayList;
-
 /**
  * Created by lennart on 04.01.15.
  */
 public class Node<T> {
-    private T content;
-    private Node<T> parent;
-    private ArrayList<Node<T>> children;
+    public T content;
+    public Node<T> parent;
+    public Node<T> leftChild;
+    public Node<T> rightChild;
 
     public Node(T content) {
         this.content = content;
-        this.children = new ArrayList<Node<T>>();
     }
 
     public boolean isRoot() {
@@ -20,7 +18,7 @@ public class Node<T> {
     }
 
     public boolean isLeaf() {
-        return children.size() == 0;
+        return leftChild == null && rightChild == null;
     }
 
     public int getLevel() {
@@ -30,16 +28,18 @@ public class Node<T> {
     public void addChild(T content) {
         Node<T> child = new Node<T>(content);
         child.parent = this;
-        this.children.add(child);
-    }
-    public Node<T> removeChild(Node<T> child) {
-        for (Node<T> node : children) {
-            if (node == child) {
-                children.remove(child);
-                child.parent = null;
-                return child;
-            }
+        if (leftChild == null) {
+            this.leftChild = child;
+        } else if (leftChild == null) {
+            this.rightChild = child;
         }
-        return null;
+    }
+
+    public void removeChild(Node<T> child) {
+        if (this.leftChild == child) {
+            this.leftChild = null;
+        } else if (this.rightChild == child) {
+            this.rightChild = null;
+        }
     }
 }
